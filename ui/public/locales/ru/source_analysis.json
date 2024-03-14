@@ -1,0 +1,22 @@
+{
+    "description": {
+        "selected_one": "{{count}} выбранный документ",
+        "selected_two": "{{count}} выбранных документа",
+        "selected_few": "{{count}} выбранных документа",
+        "selected_many": "{{count}} выбранных документов",
+        "selected_other": "{{count}} выбранных документов",
+        "no_results": "Не получилось ничего найти :("
+    },
+    "column": {
+        "query": "Поисковый запрос",
+        "max_results": "Макс. результатов",
+        "max_tokens": "Макс. токенов",
+        "prompt_analyze_chunk": "Промпт анализа кусочка",
+        "prompt_analyze_chunk_without_intermediary_results": "Промпт анализа кусочка (базовый)",
+        "prompt_combine": "Промпт объединения"
+    },
+    "action": {
+        "search": "Искать",
+        "analyze": "Анализировать"
+    }
+}

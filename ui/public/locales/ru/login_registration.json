@@ -1,0 +1,12 @@
+{
+    "title": {
+        "login": "Вход",
+        "registration": "Регистрация"
+    },
+    "message": {
+        "success": {
+            "login": "Добро пожаловать!",
+            "registration": "Вы успешно зарегистрированы"
+        }
+    }
+}

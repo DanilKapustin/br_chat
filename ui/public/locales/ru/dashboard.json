@@ -1,0 +1,10 @@
+{
+    "column": {
+        "sessions": "Диалоги",
+        "messages": "Сообщения",
+        "ratings": "Оценки",
+        "likes": "Нравится",
+        "dislikes": "Не нравится",
+        "regenerations": "Перегенерации"
+    }
+}

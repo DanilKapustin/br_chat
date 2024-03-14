@@ -1,0 +1,10 @@
+{
+    "column": {
+        "defaultLanguage": "Язык по умолчанию"
+    },
+    "message": {
+        "success": {
+            "saved": "Конфигурация сохранена"
+        }
+    }
+}

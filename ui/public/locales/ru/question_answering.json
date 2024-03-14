@@ -1,0 +1,13 @@
+{
+    "column": {
+        "message": "Сообщение",
+        "max_results": "Макс. результатов",
+        "max_tokens": "Макс. токенов",
+        "prompt_answer": "Промпт для ответа",
+        "prompt_compress_question": "Промпт для сжатия вопроса",
+        "answer_negative": "Отрицательный ответ"
+    },
+    "action": {
+        "send": "Отправить"
+    }
+}
