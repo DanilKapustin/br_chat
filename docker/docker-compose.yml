@@ -1,0 +1,111 @@
+version: '3'
+services:
+  chroma:
+    image: chromadb/chroma:0.4.18
+    restart: always
+    environment:
+      - ANONYMIZED_TELEMETRY=False
+      - PERSIST_DIRECTORY=/chroma/chroma
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - br
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=br
+      - POSTGRES_PASSWORD=br
+      - POSTGRES_DB=br
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - br
+
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - redis_data:/var/lib/redis/data
+    networks:
+      - br
+
+  api:
+    image: br-api:latest
+    restart: always
+    depends_on:
+      - chroma
+      - postgres
+      - redis
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=br
+      - DATABASE_USER=br
+      - DATABASE_PASSWORD=br
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - API_CORS_ORIGIN=${API_CORS_ORIGIN:-http://localhost:3000}
+      - API_PORT=8000
+      - API_WORKERS=${API_WORKERS:-4}
+    volumes:
+      - file_data:/app/file
+    networks:
+      - br
+
+  background:
+    image: br-background:latest
+    restart: always
+    depends_on:
+      - chroma
+      - postgres
+      - redis
+    environment:
+      - DATABASE_HOST=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=br
+      - DATABASE_USER=br
+      - DATABASE_PASSWORD=br
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=
+      - CHROMA_HOST=chroma
+      - CHROMA_PORT=8000
+      - BACKGROUND_WORKERS=${BACKGROUND_WORKERS:-4}
+    volumes:
+      - model_data:/app/model
+      - file_data:/app/file
+    networks:
+      - br
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ui:
+    image: br-ui:latest
+    restart: always
+    environment:
+      - API_URL=${API_URL:-http://localhost:8000}
+    depends_on:
+      - api
+    networks:
+      - br
+
+volumes:
+  chroma_data:
+  postgres_data:
+  redis_data:
+  model_data:
+  file_data:
+
+networks:
+  br:

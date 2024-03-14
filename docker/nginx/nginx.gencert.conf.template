@@ -1,0 +1,23 @@
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name ${API_DOMAIN};
+    server_tokens off;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name ${UI_DOMAIN};
+    server_tokens off;
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
