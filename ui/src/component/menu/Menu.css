@@ -1,0 +1,16 @@
+.logo, .logo-collapsed {
+    height: 5vh;
+    color: #b8b8b8;
+    font-family: "Roboto", sans-serif;
+    font-size: 2vh;
+    padding: 1vh;
+    padding-left: 3.5vh;
+}
+
+.logo-collapsed {
+    color: grey;
+}
+
+.logo-collapsed > span.text {
+    display: none;
+}

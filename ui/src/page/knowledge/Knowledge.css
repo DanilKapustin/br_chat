@@ -1,0 +1,13 @@
+.subtitle {
+    font-size: 80%;
+    opacity: 60%;
+}
+
+.text-modal {
+    font-size: 80%;
+    overflow: scroll;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: monospace;
+    max-height: 80vh;
+}
